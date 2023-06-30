@@ -1,0 +1,38 @@
+﻿﻿@{
+    ViewData["Title"] = "Art+Logic - Encode";
+}
+<h2>@ViewData["Title"]</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        if (ViewData.ModelState.Keys.Any(k => ViewData.ModelState[k].Errors.Any()))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+        }
+    }
+    <div class="alert alert-danger hidden" role="alert" id="idMsgAlert"></div>
+
+    <form asp-controller="DecodeEncode" asp-action="WriteEncodedText" class="row g-3" name="formFileEncode" method="post" autocomplete="off" enctype="multipart/form-data">
+        <div class="container ">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label" for="customFile">File to encode: </label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control " onchange="validateFile(this);" id="originFile" name="originFile" accept=".txt" required />
+                        <small id="fileExtensao" class="form-text text-muted">Only file with extension: .txt will be accepted</small>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="col-sm-10">
+                        <button type="submit" id="btnEnviar" class="btn btn-dark"> Send </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+
+</body>
